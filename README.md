@@ -1,6 +1,6 @@
 # better-auth-vercel-geolocation
 
-A [better-auth](https://www.better-auth.com/) plugin that enriches the auth session with Vercel edge geolocation data. On session create and refresh, it reads the [`x-vercel-ip-*` headers](https://vercel.com/docs/edge-network/headers#x-vercel-ip-city) via `@vercel/functions` server-side and writes the configured fields into the session record — no browser permission prompt, no extra API call.
+A [better-auth](https://www.better-auth.com/) plugin that enriches the auth session with Vercel edge geolocation data. On session create and refresh, it reads the [`x-vercel-ip-*` headers](https://vercel.com/docs/headers/request-headers) via `@vercel/functions` server-side and writes the configured fields into the session record — no browser permission prompt, no extra API call.
 
 > [!NOTE]
 > Requires deployment on Vercel. In local development, geo fields will be `undefined`.
