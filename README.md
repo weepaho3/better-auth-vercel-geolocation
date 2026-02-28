@@ -25,7 +25,7 @@ Requires **better-auth** >= 1.4.18 as a peer dependency.
 
 ```ts
 import { betterAuth } from 'better-auth';
-import { geolocation } from 'better-auth-plugin-vercel-geolocation';
+import { geolocation } from 'better-auth-vercel-geolocation';
 
 export const auth = betterAuth({
   plugins: [geolocation()],
@@ -42,7 +42,7 @@ npx @better-auth/cli migrate
 
 ```ts
 import { createAuthClient } from 'better-auth/react';
-import { geolocationClient } from 'better-auth-plugin-vercel-geolocation/client';
+import { geolocationClient } from 'better-auth-vercel-geolocation/client';
 
 export const authClient = createAuthClient({
   plugins: [geolocationClient()],
