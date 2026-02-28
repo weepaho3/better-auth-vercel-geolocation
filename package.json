@@ -1,0 +1,74 @@
+{
+  "name": "better-auth-vercel-geolocation",
+  "version": "0.1.0",
+  "description": "A better-auth plugin that enriches sessions with Vercel edge geolocation data.",
+  "license": "MIT",
+  "homepage": "https://github.com/weepaho3/better-auth-vercel-geolocation",
+  "bugs": {
+    "url": "https://github.com/weepaho3/better-auth-vercel-geolocation/issues"
+  },
+  "author": {
+    "name": "weepaho3",
+    "url": "https://github.com/weepaho3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weepaho3/better-auth-vercel-geolocation.git"
+  },
+  "keywords": [
+    "better-auth",
+    "better-auth-plugin",
+    "vercel",
+    "geolocation",
+    "session",
+    "nextjs"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./client": {
+      "import": {
+        "types": "./dist/client.d.ts",
+        "default": "./dist/client.js"
+      },
+      "require": {
+        "types": "./dist/client.d.cts",
+        "default": "./dist/client.cjs"
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "bunchee",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vercel/functions": "^3.4.3"
+  },
+  "devDependencies": {
+    "bunchee": "^6.9.3",
+    "typescript": "^5.7.2"
+  },
+  "peerDependencies": {
+    "better-auth": "^1.4.18"
+  }
+}
