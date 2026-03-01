@@ -9,7 +9,7 @@ A [better-auth](https://www.better-auth.com/) plugin that enriches the auth sess
 
 - **Zero-config defaults** — stores city, country, countryRegion and flag out of the box
 - **Configurable fields** — pick exactly which [geo fields](https://vercel.com/docs/edge-network/headers#x-vercel-ip-city) you need
-- **Auto-refresh** — optionally updates geo data when the session refreshes
+- **Auto-refresh** — Updates geo data when the session refreshes
 
 ## Installation
 
