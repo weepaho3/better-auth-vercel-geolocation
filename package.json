@@ -59,13 +59,17 @@
   "scripts": {
     "build": "bunchee",
     "clean": "rm -rf dist",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "release": "semantic-release"
   },
   "dependencies": {
     "@vercel/functions": "^3.4.3"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "bunchee": "^6.9.3",
+    "semantic-release": "^25.0.3",
     "typescript": "^5.7.2"
   },
   "peerDependencies": {
