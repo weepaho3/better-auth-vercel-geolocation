@@ -1,6 +1,6 @@
 import type { Geo } from '@vercel/functions';
 
-export type GeolocationField = keyof Geo;
+export type GeolocationField = keyof Geo | 'timezone';
 
 /**
  * Configuration for which geolocation fields to store.
@@ -23,6 +23,8 @@ export interface GeolocationFieldConfig {
   postalCode?: boolean;
   /** The Vercel Edge Network region that received the request. */
   region?: boolean;
+  /** The name of the time zone for the location of the requester's public IP address in ICANN Time Zone Database name format such as America/Chicago. */
+  timezone?: boolean;
 }
 
 export const DEFAULT_FIELDS = {
