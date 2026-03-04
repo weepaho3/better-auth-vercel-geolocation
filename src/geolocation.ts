@@ -45,6 +45,7 @@ export const geolocation = <
     for (const field of activeFields) {
       session[field] = geo[field];
     }
+    session.timezone = request.headers.get('x-vercel-ip-timezone');
     return { data: session };
   }
 
