@@ -1,6 +1,6 @@
 # better-auth-vercel-geolocation
 
-A [better-auth](https://www.better-auth.com/) plugin that enriches the auth session with Vercel edge geolocation data. On session create and refresh, it reads the [`x-vercel-ip-*` headers](https://vercel.com/docs/headers/request-headers) via `@vercel/functions` server-side and writes the configured fields into the session record — no browser permission prompt, no extra API call.
+A [better-auth](https://www.better-auth.com/) plugin that enriches the auth session with Vercel edge geolocation data. On session create and refresh, it reads the `[x-vercel-ip-*` headers](https://vercel.com/docs/headers/request-headers) server-side and writes the configured fields into the session record — no browser permission prompt, no extra API call.
 
 > [!NOTE]
 > Requires deployment on Vercel. In local development, geo fields will be `undefined`.
@@ -55,17 +55,36 @@ The session now includes geolocation fields:
 const { data: session } = authClient.useSession();
 
 session.city; // "Hamburg"
-session.country; // "HH"
-session.countryRegion; // "BE"
+session.country; // "DE"
+session.countryRegion; // "HH"
 session.flag; // "🇩🇪"
 ```
 
 ## Options
 
+
 | Option            | Type                     | Default                                  | Description                                   |
 | ----------------- | ------------------------ | ---------------------------------------- | --------------------------------------------- |
 | `fields`          | `GeolocationFieldConfig` | `{ city, country, countryRegion, flag }` | Which fields to store on the session          |
 | `updateOnRefresh` | `boolean`                | `true`                                   | Update geo data when the session is refreshed |
+
+
+## Available fields
+
+
+| Field           | Header                         | Example           | Default |
+| --------------- | ------------------------------ | ----------------- | ------- |
+| `city`          | `x-vercel-ip-city`             | `"Hamburg"`       | ✅       |
+| `country`       | `x-vercel-ip-country`          | `"DE"`            | ✅       |
+| `countryRegion` | `x-vercel-ip-country-region`   | `"HH"`            | ✅       |
+| `flag`          | *(derived from country)*       | `"🇩🇪"`          | ✅       |
+| `latitude`      | `x-vercel-ip-latitude`         | `"53.5573"`       |         |
+| `longitude`     | `x-vercel-ip-longitude`        | `"9.9652"`        |         |
+| `postalCode`    | `x-vercel-ip-postal-code`      | `"20359"`         |         |
+| `region`        | *(Vercel Edge Network region)* | `"fra1"`          |         |
+| `timezone`      | `x-vercel-ip-timezone`         | `"Europe/Berlin"` |         |
+
+
 
 ## License
 

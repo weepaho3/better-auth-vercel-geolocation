@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from 'better-auth';
 
-import { geolocation as extractGeo } from '@vercel/functions';
+import { geolocation as extractGeo , } from '@vercel/functions';
 
 import {
   DEFAULT_FIELDS,
@@ -43,7 +43,10 @@ export const geolocation = <
 
     const geo = extractGeo(request);
     for (const field of activeFields) {
-      session[field] = geo[field];
+      session[field] =
+        field === 'timezone'
+          ? (request.headers.get('x-vercel-ip-timezone') ?? undefined)
+          : geo[field as keyof typeof geo];
     }
     return { data: session };
   }
