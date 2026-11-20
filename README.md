@@ -51,15 +51,15 @@ export const authClient = createAuthClient({
 });
 ```
 
-The session now includes geolocation fields:
+The session now includes geolocation fields. `data` holds `{ session, user }` and is `null` when nobody is signed in:
 
 ```ts
-const { data: session } = authClient.useSession();
+const { data } = authClient.useSession();
 
-session.city; // "Hamburg"
-session.country; // "DE"
-session.countryRegion; // "HH"
-session.flag; // "🇩🇪"
+data?.session.city; // "Hamburg"
+data?.session.country; // "DE"
+data?.session.countryRegion; // "HH"
+data?.session.flag; // "🇩🇪"
 ```
 
 ## Types
@@ -68,10 +68,12 @@ The fields are inferred on `auth.$Infer.Session.session`, on the result of `auth
 
 ```ts
 type GeoSession = typeof auth.$Infer.Session.session;
-const result = await auth.api.getSession({ headers });
-const { data } = authClient.useSession();
 
+const result = await auth.api.getSession({ headers });
 result?.session.city; // string | null | undefined
+
+const { data } = authClient.useSession();
+data?.session.city; // string | null | undefined
 ```
 
 ## Options
