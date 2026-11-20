@@ -1,5 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { createAuthClient } from 'better-auth/client';
+import { admin } from 'better-auth/plugins';
 
 import { geolocation } from '../src';
 import { geolocationClient } from '../src/client';
@@ -11,6 +12,7 @@ const auth = betterAuth({ plugins: [geolocation()] });
 const timezoneAuth = betterAuth({
   plugins: [geolocation({ fields: { timezone: true } })],
 });
+const adminAuth = betterAuth({ plugins: [admin(), geolocation()] });
 const client = createAuthClient({ plugins: [geolocationClient()] });
 
 type InferredSession = (typeof auth)['$Infer']['Session'];
@@ -61,3 +63,31 @@ export type ApiSessionHasNoLatitude = Expect<
 type ClientSession = (typeof client)['$Infer']['Session']['session'];
 
 export type ClientSessionHasCity = Expect<Has<ClientSession, 'city'>>;
+
+type AdminInferred = (typeof adminAuth)['$Infer']['Session'];
+
+export type AdminUserHasRole = Expect<Has<AdminInferred['user'], 'role'>>;
+export type AdminUserHasBanned = Expect<Has<AdminInferred['user'], 'banned'>>;
+export type AdminSessionHasImpersonatedBy = Expect<
+  Has<AdminInferred['session'], 'impersonatedBy'>
+>;
+export type AdminSessionHasToken = Expect<Has<AdminInferred['session'], 'token'>>;
+export type AdminSessionHasCity = Expect<Has<AdminInferred['session'], 'city'>>;
+
+type AdminApiSession = NonNullable<
+  Awaited<ReturnType<(typeof adminAuth)['api']['getSession']>>
+>;
+
+export type AdminApiUserHasRole = Expect<Has<AdminApiSession['user'], 'role'>>;
+export type AdminApiUserHasBanned = Expect<
+  Has<AdminApiSession['user'], 'banned'>
+>;
+export type AdminApiSessionHasImpersonatedBy = Expect<
+  Has<AdminApiSession['session'], 'impersonatedBy'>
+>;
+export type AdminApiSessionHasToken = Expect<
+  Has<AdminApiSession['session'], 'token'>
+>;
+export type AdminApiSessionHasCity = Expect<
+  Has<AdminApiSession['session'], 'city'>
+>;
