@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from 'better-auth';
 
-import { geolocation as extractGeo , } from '@vercel/functions';
+import { geolocation as extractGeo } from '@vercel/functions';
 
 import {
   DEFAULT_FIELDS,
@@ -9,7 +9,6 @@ import {
   type GeolocationFieldConfig,
   type GeolocationPluginOptions,
   type GeoSchemaFields,
-  type InferGeoSession,
 } from './types';
 
 export const geolocation = <
@@ -55,11 +54,6 @@ export const geolocation = <
     id: 'vercel-geolocation',
     schema: {
       session: { fields: schemaFields },
-    },
-    $Infer: {
-      Session: {
-        session: {} as InferGeoSession<T>,
-      },
     },
     init() {
       return {
