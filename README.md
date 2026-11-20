@@ -17,7 +17,7 @@ A [better-auth](https://www.better-auth.com/) plugin that enriches the auth sess
 npm install better-auth-vercel-geolocation
 ```
 
-Requires **better-auth** >= 1.4.18 as a peer dependency.
+Requires **better-auth** >= 1.5.0 as a peer dependency.
 
 ## Quick start
 
@@ -35,8 +35,10 @@ export const auth = betterAuth({
 ### 2. Migrate the database
 
 ```bash
-npx @better-auth/cli migrate
+npx auth@latest migrate
 ```
+
+If you use an ORM adapter such as Drizzle or Prisma, run `npx auth@latest generate` instead and apply the generated schema with your ORM's migration tooling.
 
 ### 3. Add the client plugin
 
@@ -60,6 +62,18 @@ session.countryRegion; // "HH"
 session.flag; // "🇩🇪"
 ```
 
+## Types
+
+The fields are inferred on `auth.$Infer.Session.session`, on the result of `auth.api.getSession()` and on the session of the client:
+
+```ts
+type GeoSession = typeof auth.$Infer.Session.session;
+const result = await auth.api.getSession({ headers });
+const { data } = authClient.useSession();
+
+result?.session.city; // string | null | undefined
+```
+
 ## Options
 
 
@@ -70,6 +84,8 @@ session.flag; // "🇩🇪"
 
 
 ## Available fields
+
+The values come from Vercel's `x-vercel-ip-*` request headers. Off Vercel they are empty, and a client can send those headers itself, so they must not be used for security decisions.
 
 
 | Field           | Header                         | Example           | Default |
