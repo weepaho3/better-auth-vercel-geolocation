@@ -60,12 +60,14 @@
     "build": "bunchee",
     "clean": "rm -rf dist",
     "type-check": "tsc --noEmit",
+    "test": "bun test",
     "release": "semantic-release"
   },
   "dependencies": {
     "@vercel/functions": "^3.11.3"
   },
   "devDependencies": {
+    "@types/bun": "^1.4.5",
     "better-auth": "1.7.27",
     "bunchee": "^6.12.2",
     "semantic-release": "^25.0.9",
